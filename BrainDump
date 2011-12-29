@@ -1,0 +1,69 @@
+== Primary Task List ==
+- DONE class Meetup API Request
+--- DONE Responsible for all interaction with the API
+--- DONE Implement get()
+- DONE Custom exceptions
+--- DONE MissingParameterException
+- DONE class MeetupApiResponse
+--- DONE Holds response from calls to API
+--- DONE(no stdClass) http response code, content (converted to array or stdClass)
+--- DONE(only as array) esponse content accessable as stdClass by default, but also array accessable
+- DONE class extends MeetupApiRequest to get /2/events
+--- DONE All extended classes should use vars for endpoints
+- DONE Add links in all classes to their manual pages for parameters
+- Document MeetupExceptions
+- DONE Finish groupings
+--- DONE groups
+--- DONE members
+--- DONE messaging
+--- DONE photos
+--- DONE rsvps
+--- DONE topics
+--- DONE venues
+- DONE check all comment documentation
+- DONE create a Github repo
+--- DONE upload files
+--- DONE create basic wikipages on usage
+------ DONE queries through endpoint classes
+------ DONE direct queries using MeetupApiRequest directly
+- TURN IT IN!!!
+--- Have Meetup team review it and make it the official PHP SDK?
+
+== Secondary Task List ==
+- Setup MEETUP_AUTH_TYPE to actually work
+- Alter class MeetupApiRequest
+--- Add post()
+- Provide error messages in response class in addition to the codes
+- Add in some security to the endpoint calls that will only send valid fields to API
+--- Should this client enforce schema?
+- Setup autoloader in Meetup.php
+- Create good messages in exception classes
+- Figure out why the cities endpoint is useful
+- Start doing the everywhere endpoints
+- support POST
+- support DELETE
+- support oembed endpoint?
+- support streams
+- support oAuth
+
+
+
+== Vomit from my brain ==
+WARNING: Nothing below this line may make sense, nor may it be implemented...
+
+
+Basic flow:
+- User sends request through an object to the request class
+    MeetupEvents->getEvent(3445)
+- MeetupEvents class puts together the needed info and sends it to MeetupApiRequest
+- MeetupApiRequest makes the request and returns a MeetupApiResponse object
+- User does something with it
+
+== Documentation ==
+- Notes
+--- Only supports GET
+- Supported endpoints
+- Setup the library
+--- Add the API key
+- Using pre-built endpoint classes
+- Directly querying the API
