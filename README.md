@@ -1,5 +1,7 @@
 # Meetup API client for PHP
-This project aims to create a pure PHP client for the Meetup API
+Meetup (http://meetup.com) is a social networking site based around community groups. Meetup provides an API to access their platform services from remote applications to manage authentication, events, rsvps and more.
+
+Until now a good PHP client for the Meetup API has not existed. This project aims to bridge that gap by providing a high quality stand alone Meetup API PHP client. This client is simple to use through provided classes and also allows powerful advanced usage through direct queries to the API
 
 *NOTE:* This project currently only supports GET requests to the Meetup API
 
