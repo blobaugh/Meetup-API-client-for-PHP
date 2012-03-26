@@ -44,7 +44,7 @@ class MeetupApiResponse implements ArrayAccess, Iterator{
      * @param JSON $Response
      */
     public function setResponse($Response) {
-        $this->mResponse = json_decode($Response, true);
+        $this->mResponse = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '',$Response), true);
         //dBug($this->mResponse);
     }
 
