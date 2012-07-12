@@ -35,8 +35,8 @@ Full documentation can be found on the Github project wiki at https://github.com
 - Include the Meetup.php file in your application
 - * I.E. In /var/www/myapp/index.php
 - * Use require_once('Meetup-API-client-for-PHP/Meetup.php');
-- Edit Meetup.php and set your Meetup API key
-- * define( 'MEETUP_API_KEY' , '<PUT YOUR MEETUP API KEY HERE - http://www.meetup.com/meetup_api/key/>' );
+- Edit meetup_config.php and set your Meetup API key, available at http://www.meetup.com/meetup_api/key/
+- * $meetup_api_key = '<YOUR MEETUP API KEY>';
 - Begin using the new Meetup functionality in your application!
 
 # Using the pre-built endpoint classes
@@ -46,7 +46,7 @@ These classes take an associative array of parameters that correspond to the par
 
 Example: Accessing all Meetup events for user Ben Lobaugh with ID 14508967. See http://www.meetup.com/meetup_api/docs/2/events/ for additional parameters and response format
 
-$m = MeetupEvents();
+$m = new MeetupEvents();
 $events = $m->getEvents( array( 'member_id' => '14508967' ) );
 
 $events will be in the form of an associative array
