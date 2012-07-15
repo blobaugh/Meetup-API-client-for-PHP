@@ -1,18 +1,5 @@
 <?php
 
-// API authoriaztion type
-define( 'MEETUP_AUTH_KEY', 'key' );
-define( 'MEETUP_AUTH_OATUH2', 'oauth2' );
-
-require_once( 'meetup_config.php' );
-
-// Choose the authorization type
-define( 'MEETUP_AUTH_TYPE', $meetup_auth_type );
-
-// Meetup.com API Key
-//define( 'MEETUP_API_KEY' , '<PUT YOUR MEETUP API KEY HERE - http://www.meetup.com/meetup_api/key/>' );
-define( 'MEETUP_API_KEY', $meetup_api_key);
-
 // Meetup.com API URL
 define( 'MEETUP_API_URL', 'https://api.meetup.com' );
 
@@ -47,6 +34,7 @@ define('MEETUP_ENDPOINT_OPEN_VENUES', '/2/open_venues');
 define('MEETUP_ENDPOINT_VENUES', '/2/venues');
 
 // Setup includes - this should be an autoloader soon
+require_once('MeetupConnection.class.php');
 require_once('MeetupApiResponse.class.php');
 require_once('MeetupApiRequest.class.php');
 require_once('MeetupExceptions.class.php');

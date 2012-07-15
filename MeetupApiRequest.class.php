@@ -6,10 +6,14 @@
 
 class MeetupApiRequest {
 
+    private $_conn;
+
     /**
      * Default constructor
      */
-    public function __construct() {}
+    public function __construct($conn) {
+        $this->_conn = $conn; 
+    }
 
     /**
      * Performs the GET query against the specified endpoint
@@ -76,7 +80,7 @@ class MeetupApiRequest {
         foreach($Parameters AS $k => $v) {
             $params .= "&$k=$v";
         }
-        return MEETUP_API_URL . $Endpoint . "?key=" . MEETUP_API_KEY . $params;
+        return MEETUP_API_URL . $Endpoint . "?key=" . $this->_conn->auth_params['key'] . $params;
     }
 
     /**
