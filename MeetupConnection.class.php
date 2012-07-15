@@ -14,9 +14,16 @@ class MeetupConnection {
      * @param String $auth_type - The authentication type. Only 'key' is supported
      */
     public function __construct($auth_type, $params=array()) {
-	if (in_array($auth_type, $this->allowed_auth_types)) {
+        if (in_array($auth_type, $this->allowed_auth_types)) {
             $this->auth_type = $auth_type;
-            $this->auth_params = $params;
-}
-    }	
+            if ($auth_type == 'key') {
+                if (array_key_exists('key', $params))
+                    $this->auth_params = $params;
+                else
+                    throw new Exception('Invalid parameters for MeetupConnection construction');
+            }
+        } else {
+            throw new Exception('Invalid parameters for MeetupConnection construction');
+        }
+    }
 }
