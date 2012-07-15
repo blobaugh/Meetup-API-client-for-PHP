@@ -5,8 +5,8 @@
  * support oAuth.
  */
 abstract class MeetupConnection {
-	abstract protected function get( $Url );
-	abstract protected function buildUrl( $Endpoint, $Parameters, $RequiredParameters );
+    abstract protected function get( $Url );
+    abstract protected function buildUrl( $Endpoint, $Parameters, $RequiredParameters );
     /**
      * Checks the input parameters against a list of required parameters to
      * ensure at least one of the required parameters exists.
@@ -36,16 +36,16 @@ abstract class MeetupConnection {
 }
 
 class KeyAuthMeetupConnection extends MeetupConnection {
-	/*
-	* Initializes a connection to the Meetup API
-	* 
-	* @param String $auth_type - The authentication type. Only 'key' is supported
-	*/
-	private $_key;
+    /*
+    * Initializes a connection to the Meetup API
+    * 
+    * @param String $auth_type - The authentication type. Only 'key' is supported
+    */
+    private $_key;
 
-	public function __construct($key) {
-		$this->_key = $key;
-	}
+    public function __construct($key) {
+        $this->_key = $key;
+    }
 
     /**
      * Performs the GET query against the specified endpoint
@@ -68,7 +68,7 @@ class KeyAuthMeetupConnection extends MeetupConnection {
             CURLOPT_TIMEOUT        => 120,      // timeout on response
             CURLOPT_HEADER => 0
         );
-//echo $Url;
+        //echo $Url;
         $ch = curl_init( $Url );
         curl_setopt_array( $ch, $options );
         $content = curl_exec( $ch );
@@ -118,12 +118,12 @@ class KeyAuthMeetupConnection extends MeetupConnection {
 }
 
 class OAuth2MeetupConnection extends MeetupConnection {
-	public function __construct($client_id, $redirect_uri) {
-		
-	}	
-	public function get($url) {
+    public function __construct($client_id, $redirect_uri) {
+        
+    }    
+    public function get($url) {
 
-	}
+    }
     public function buildUrl( $Endpoint, $Parameters, $RequiredParameters = null ) {
         if(is_array($RequiredParameters) && !$this->verifyParameters( $RequiredParameters, $Parameters )) {
             throw new MeetupInvalidParametersException( $RequiredParameters );
