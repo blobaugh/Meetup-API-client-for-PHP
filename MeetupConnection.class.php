@@ -5,7 +5,7 @@
  * support oAuth.
  */
 abstract class MeetupConnection {
-    abstract protected function buildUrl( $Endpoint, $Parameters, $RequiredParameters );
+    abstract protected function modify_params( $Parameters );
 
     /**
      * Performs the GET query against the specified endpoint
@@ -55,6 +55,27 @@ abstract class MeetupConnection {
 
         return $response;
     }
+
+    /**
+     *
+     * @throws MeetupInvalidParametersException
+     * @param <type> $Endpoint
+     * @param <type> $Parameters
+     * @param <type> $RequiredParameters - Optional - Some endpoints do not have parameters
+     * @return <type>
+     */
+    public function buildUrl( $Endpoint, $Parameters, $RequiredParameters = null ) {
+        if(is_array($RequiredParameters) && !$this->verifyParameters( $RequiredParameters, $Parameters )) {
+            throw new MeetupInvalidParametersException( $RequiredParameters );
+        }
+        $Parameters = $this->modify_params($Parameters);
+        $params = '';
+        foreach($Parameters AS $k => $v) {
+            $params .= "&$k=$v";
+        }
+        return MEETUP_API_URL . $Endpoint . "?" . $params;
+    }
+
     /**
      * Checks the input parameters against a list of required parameters to
      * ensure at least one of the required parameters exists.
@@ -95,23 +116,9 @@ class KeyAuthMeetupConnection extends MeetupConnection {
         $this->_key = $key;
     }
 
-    /**
-     *
-     * @throws MeetupInvalidParametersException
-     * @param <type> $Endpoint
-     * @param <type> $Parameters
-     * @param <type> $RequiredParameters - Optional - Some endpoints do not have parameters
-     * @return <type>
-     */
-    public function buildUrl( $Endpoint, $Parameters, $RequiredParameters = null ) {
-        if(is_array($RequiredParameters) && !$this->verifyParameters( $RequiredParameters, $Parameters )) {
-            throw new MeetupInvalidParametersException( $RequiredParameters );
-        }
-        $params = '';
-        foreach($Parameters AS $k => $v) {
-            $params .= "&$k=$v";
-        }
-        return MEETUP_API_URL . $Endpoint . "?key=" . $this->_key . $params;
+    public function modify_params($params) {
+        $params['key'] = $this->_key;
+        return $params;
     }
 
 }
@@ -121,14 +128,8 @@ class OAuth2MeetupConnection extends MeetupConnection {
     public function __construct($access_token) {
 	$this->_access_token = $access_token;
     }    
-    public function buildUrl( $Endpoint, $Parameters, $RequiredParameters = null ) {
-        if(is_array($RequiredParameters) && !$this->verifyParameters( $RequiredParameters, $Parameters )) {
-            throw new MeetupInvalidParametersException( $RequiredParameters );
-        }
-        $params = '';
-        foreach($Parameters AS $k => $v) {
-            $params .= "&$k=$v";
-        }
-        return MEETUP_API_URL . $Endpoint . "?access_token=" . $this->_access_token . $params;
+    public function modify_params($params) {
+        $params['access_token'] = $this->_access_token;
+        return $params;
     }
 }
