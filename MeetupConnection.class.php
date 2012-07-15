@@ -5,47 +5,7 @@
  * support oAuth.
  */
 abstract class MeetupConnection {
-    abstract protected function get( $Url );
     abstract protected function buildUrl( $Endpoint, $Parameters, $RequiredParameters );
-    /**
-     * Checks the input parameters against a list of required parameters to
-     * ensure at least one of the required parameters exists.
-     *
-     * NOTE: The Meetup API contains a list of parameters that are required for
-     * each endpoint with a default condition of "any of"
-     * 
-     * @param Array $RequiredList - Names of required parameters
-     * @param Array $Parameters - List of provided paramters
-     * @return Boolean
-     */
-    public function verifyParameters($RequiredList, $Parameters) {
-        $Parameters = array_keys($Parameters);
-
-        /*
-         * Check to see if any of the required list is in the parameters array
-         * Since the Meetup API requires "any of" if a required key is found in
-         * parameters the verification will pass
-         */
-        foreach($RequiredList AS $r) {
-            if(in_array($r, $Parameters)) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-class KeyAuthMeetupConnection extends MeetupConnection {
-    /*
-    * Initializes a connection to the Meetup API
-    * 
-    * @param String $auth_type - The authentication type. Only 'key' is supported
-    */
-    private $_key;
-
-    public function __construct($key) {
-        $this->_key = $key;
-    }
 
     /**
      * Performs the GET query against the specified endpoint
@@ -95,6 +55,45 @@ class KeyAuthMeetupConnection extends MeetupConnection {
 
         return $response;
     }
+    /**
+     * Checks the input parameters against a list of required parameters to
+     * ensure at least one of the required parameters exists.
+     *
+     * NOTE: The Meetup API contains a list of parameters that are required for
+     * each endpoint with a default condition of "any of"
+     * 
+     * @param Array $RequiredList - Names of required parameters
+     * @param Array $Parameters - List of provided paramters
+     * @return Boolean
+     */
+    public function verifyParameters($RequiredList, $Parameters) {
+        $Parameters = array_keys($Parameters);
+
+        /*
+         * Check to see if any of the required list is in the parameters array
+         * Since the Meetup API requires "any of" if a required key is found in
+         * parameters the verification will pass
+         */
+        foreach($RequiredList AS $r) {
+            if(in_array($r, $Parameters)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class KeyAuthMeetupConnection extends MeetupConnection {
+    /*
+    * Initializes a connection to the Meetup API
+    * 
+    * @param String $auth_type - The authentication type. Only 'key' is supported
+    */
+    private $_key;
+
+    public function __construct($key) {
+        $this->_key = $key;
+    }
 
     /**
      *
@@ -118,12 +117,10 @@ class KeyAuthMeetupConnection extends MeetupConnection {
 }
 
 class OAuth2MeetupConnection extends MeetupConnection {
-    public function __construct($client_id, $redirect_uri) {
-        
+    private $_access_token;
+    public function __construct($access_token) {
+	$this->_access_token = $access_token;
     }    
-    public function get($url) {
-
-    }
     public function buildUrl( $Endpoint, $Parameters, $RequiredParameters = null ) {
         if(is_array($RequiredParameters) && !$this->verifyParameters( $RequiredParameters, $Parameters )) {
             throw new MeetupInvalidParametersException( $RequiredParameters );
@@ -132,6 +129,6 @@ class OAuth2MeetupConnection extends MeetupConnection {
         foreach($Parameters AS $k => $v) {
             $params .= "&$k=$v";
         }
-        return MEETUP_API_URL . $Endpoint . "?key=" . $this->_conn->auth_params['key'] . $params;
+        return MEETUP_API_URL . $Endpoint . "?access_token=" . $this->_access_token . $params;
     }
 }

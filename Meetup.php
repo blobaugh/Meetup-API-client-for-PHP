@@ -2,6 +2,8 @@
 
 // Meetup.com API URL
 define( 'MEETUP_API_URL', 'https://api.meetup.com' );
+define( 'MEETUP_AUTH_URL', 'https://secure.meetup.com/oauth2/authorize' );
+define( 'MEETUP_ACCESS_TOKEN_URL', 'https://secure.meetup.com/oauth2/access' );
 
 
 // API Endpoints
