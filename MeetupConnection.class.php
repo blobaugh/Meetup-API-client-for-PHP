@@ -71,8 +71,10 @@ abstract class MeetupConnection {
         $Parameters = $this->modify_params($Parameters);
         $params = '';
         foreach($Parameters AS $k => $v) {
-            $params .= "&$k=$v";
+            $params .= "$k=$v&";
         }
+        rtrim($params,'&');
+
         return MEETUP_API_URL . $Endpoint . "?" . $params;
     }
 
@@ -104,18 +106,24 @@ abstract class MeetupConnection {
     }
 }
 
-class KeyAuthMeetupConnection extends MeetupConnection {
-    /*
-    * Initializes a connection to the Meetup API
-    * 
-    * @param String $auth_type - The authentication type. Only 'key' is supported
-    */
+class MeetupKeyAuthConnection extends MeetupConnection {
     private $_key;
 
+    /*
+    * Initializes a connection to the Meetup API using API keys
+    * 
+    * @param String $key - A users's Meetup api key
+    */
     public function __construct($key) {
         $this->_key = $key;
     }
 
+    /**
+     * Adds additional query parameters for key authentication
+     * 
+     * @param Array $params - request parameters
+     * @return Array modified request parameters
+     */
     public function modify_params($params) {
         $params['key'] = $this->_key;
         return $params;
@@ -123,11 +131,24 @@ class KeyAuthMeetupConnection extends MeetupConnection {
 
 }
 
-class OAuth2MeetupConnection extends MeetupConnection {
+class MeetupOAuth2Connection extends MeetupConnection {
     private $_access_token;
+
+    /*
+    * Initializes a connection to the Meetup API using oAuth 2
+    * 
+    * @param String $access_token - A valid access token received from a Meetup access token request
+    */
     public function __construct($access_token) {
 	$this->_access_token = $access_token;
     }    
+
+    /**
+     * Adds additional query parameters for key authentication
+     * 
+     * @param Array $params - request parameters
+     * @return Array modified request parameters
+     */
     public function modify_params($params) {
         $params['access_token'] = $this->_access_token;
         return $params;
