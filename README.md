@@ -37,7 +37,7 @@ Full documentation can be found on the Github project wiki at https://github.com
 - * Use require_once('Meetup-API-client-for-PHP/Meetup.php');
 - Establish a connection to the API with your Meetup API key, available at http://www.meetup.com/meetup_api/key/
 - * $meetup_api_key = '<YOUR MEETUP API KEY>';
-- * $connection = new MeetupConnection('key', array('key' => $api_key));
+- * $connection = new MeetupKeyAuthConnection($meetup_api_key);
 - Begin using the new Meetup functionality in your application!
 
 # Using the pre-built endpoint classes
