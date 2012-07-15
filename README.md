@@ -35,8 +35,9 @@ Full documentation can be found on the Github project wiki at https://github.com
 - Include the Meetup.php file in your application
 - * I.E. In /var/www/myapp/index.php
 - * Use require_once('Meetup-API-client-for-PHP/Meetup.php');
-- Edit meetup_config.php and set your Meetup API key, available at http://www.meetup.com/meetup_api/key/
+- Establish a connection to the API with your Meetup API key, available at http://www.meetup.com/meetup_api/key/
 - * $meetup_api_key = '<YOUR MEETUP API KEY>';
+- * $connection = new MeetupConnection('key', array('key' => $api_key));
 - Begin using the new Meetup functionality in your application!
 
 # Using the pre-built endpoint classes
@@ -46,7 +47,7 @@ These classes take an associative array of parameters that correspond to the par
 
 Example: Accessing all Meetup events for user Ben Lobaugh with ID 14508967. See http://www.meetup.com/meetup_api/docs/2/events/ for additional parameters and response format
 
-$m = new MeetupEvents();
+$m = new MeetupEvents($connection);
 $events = $m->getEvents( array( 'member_id' => '14508967' ) );
 
 $events will be in the form of an associative array
@@ -61,7 +62,7 @@ The MeetupApiResponse object will contain the HTTP code and API response. To use
 
 Example: Accessing all Meetup events for user Ben Lobaugh with ID 14508967. See http://www.meetup.com/meetup_api/docs/2/events/ for additional parameters and response format
 
-$m = new MeetupApiRequest();
+$m = new MeetupApiRequest($connection);
 $events = $m->query( MEETUP_ENDPOINT_EVENTS, array( 'member_id' => '14508967' ) );
 
 $events will be a MeetupApiResponse object that can be access like an array (E.G. $events['results']) or used in a loop to view each event entry (E.G. foreach( $events AS $event ) )
