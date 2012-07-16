@@ -50,3 +50,4 @@ require_once('MeetupPhotos.class.php');
 require_once('MeetupRsvps.class.php');
 require_once('MeetupTopics.class.php');
 require_once('MeetupVenues.class.php');
+require_once("MeetupOAuth2Helper.class.php");
