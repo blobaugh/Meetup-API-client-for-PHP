@@ -35,19 +35,3 @@ define('MEETUP_ENDPOINT_TOPICS', '/topics');
 define('MEETUP_ENDPOINT_OPEN_VENUES', '/2/open_venues');
 define('MEETUP_ENDPOINT_VENUES', '/2/venues');
 
-// Setup includes - this should be an autoloader soon
-require_once('MeetupConnection.class.php');
-require_once('MeetupApiResponse.class.php');
-require_once('MeetupApiRequest.class.php');
-require_once('MeetupExceptions.class.php');
-
-require_once('MeetupCheckins.class.php');
-require_once('MeetupEvents.class.php');
-require_once('MeetupFeeds.class.php');
-require_once('MeetupGroups.class.php');
-require_once('MeetupMembers.class.php');
-require_once('MeetupPhotos.class.php');
-require_once('MeetupRsvps.class.php');
-require_once('MeetupTopics.class.php');
-require_once('MeetupVenues.class.php');
-require_once("MeetupOAuth2Helper.class.php");

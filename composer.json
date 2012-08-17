@@ -1,0 +1,24 @@
+{
+    "name": "blobaugh/meetup-api-client",
+    "type": "library",
+    "description": "A PHP API wrapper for the Meetup.com API",
+    "keywords": ["meetup", "api"],
+    "authors": [
+        {
+            "name": "Ben Lobaugh",
+            "email": "ben@lobaugh.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/blobaugh/Meetup-API-client-for-PHP/issues"
+    },
+
+    "require": {
+
+    },
+
+    "autoload": {
+        "classmap": ["."],
+        "files": ["Meetup.php"]
+    }
+}
