@@ -21,7 +21,7 @@ class MeetupRsvps extends MeetupApiRequest {
     public function getRsvps( $Parameters ) {
         $required_params = array( 'event_id');
         $url = $this->buildUrl( MEETUP_ENDPOINT_RSVPS, $Parameters, $required_params );
-        echo $url;
+
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
     }
