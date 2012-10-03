@@ -22,6 +22,12 @@ class MeetupApiRequest {
     public function buildUrl( $EndPoint, $Parameters, $RequiredParameters = null ) {
         return $this->_conn->buildUrl( $EndPoint, $Parameters, $RequiredParameters );
     }
+    
+    public function query( $EndPoint, $Parameters, $RequiredParameters = null ) {
+        $url = $this->buildUrl( MEETUP_ENDPOINT_EVENTS, $Parameters, $required_params );
+        $response =  $this->get( $url )->getResponse();
+        return $response['results'];
+    }
 
 
 } // end class
