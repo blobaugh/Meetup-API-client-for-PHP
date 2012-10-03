@@ -17,7 +17,7 @@ class MeetupTopics extends MeetupApiRequest {
      */
     public function getTopics( $Parameters ) {
         $url = $this->buildUrl( MEETUP_ENDPOINT_TOPICS, $Parameters );
-        echo $url;
+       // echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
     }
