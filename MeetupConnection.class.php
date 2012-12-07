@@ -19,7 +19,7 @@ abstract class MeetupConnection {
     public function get( $Url ) {
         // Clear error status
         $ret = false;
-        
+
         $options = array(
             CURLOPT_RETURNTRANSFER => true,     // return web page
             CURLOPT_HEADER         => true,    // don't return headers
@@ -28,7 +28,7 @@ abstract class MeetupConnection {
             CURLOPT_TIMEOUT        => 120,      // timeout on response
             CURLOPT_HEADER => 0
         );
-        //echo $Url;
+
         $ch = curl_init( $Url );
         curl_setopt_array( $ch, $options );
         $content = curl_exec( $ch );
@@ -39,7 +39,7 @@ abstract class MeetupConnection {
         $response = new MeetupApiResponse();
         $response->setHttpCode($header['http_code']);
         $response->setResponse($header['content']);
-        
+
 
 
         if( $response->getHttpCode() == '400' ) {
@@ -84,7 +84,7 @@ abstract class MeetupConnection {
      *
      * NOTE: The Meetup API contains a list of parameters that are required for
      * each endpoint with a default condition of "any of"
-     * 
+     *
      * @param Array $RequiredList - Names of required parameters
      * @param Array $Parameters - List of provided paramters
      * @return Boolean
@@ -111,7 +111,7 @@ class MeetupKeyAuthConnection extends MeetupConnection {
 
     /*
     * Initializes a connection to the Meetup API using API keys
-    * 
+    *
     * @param String $key - A users's Meetup api key
     */
     public function __construct($key) {
@@ -120,7 +120,7 @@ class MeetupKeyAuthConnection extends MeetupConnection {
 
     /**
      * Adds additional query parameters for key authentication
-     * 
+     *
      * @param Array $params - request parameters
      * @return Array modified request parameters
      */
@@ -136,16 +136,16 @@ class MeetupOAuth2Connection extends MeetupConnection {
 
     /*
     * Initializes a connection to the Meetup API using oAuth 2
-    * 
+    *
     * @param String $access_token - A valid access token received from a Meetup access token request
     */
     public function __construct($access_token) {
 	$this->_access_token = $access_token;
-    }    
+    }
 
     /**
      * Adds additional query parameters for key authentication
-     * 
+     *
      * @param Array $params - request parameters
      * @return Array modified request parameters
      */

@@ -20,7 +20,6 @@ class MeetupMembers extends MeetupApiRequest {
     public function getMembers( $Parameters ) {
         $required_params = array( 'group_id', 'group_urlname', 'member_id', 'service', 'topic,groupnum');
         $url = $this->buildUrl( MEETUP_ENDPOINT_MEMBERS, $Parameters, $required_params );
-       // echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
     }
@@ -35,7 +34,6 @@ class MeetupMembers extends MeetupApiRequest {
      */
     public function getMember( $MemberId, $Parameters = array() ) {
         $url = $this->buildUrl( MEETUP_ENDPOINT_MEMBER . "/$MemberId", $Parameters );
-      //  echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response;
     }
@@ -54,7 +52,6 @@ class MeetupMembers extends MeetupApiRequest {
     public function getProfiles( $Parameters ) {
         $required_params = array( 'group_id', 'group_urlname', 'topic,groupnum');
         $url = $this->buildUrl( MEETUP_ENDPOINT_PROFILES, $Parameters, $required_params );
-       // echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
     }
