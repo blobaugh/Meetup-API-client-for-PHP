@@ -17,7 +17,6 @@ class MeetupFeeds extends MeetupApiRequest {
      */
     public function getActivity( $Parameters = array() ) {
         $url = $this->buildUrl( MEETUP_ENDPOINT_FEED_ACTIVITY, $Parameters );
-        echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
     }
