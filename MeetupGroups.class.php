@@ -21,7 +21,6 @@ class MeetupGroups extends MeetupApiRequest {
     public function getGroups( $Parameters ) {
         $required_params = array( 'campaign_id', 'domain', 'group_id', 'group_urlname', 'member_id', 'organizer_id', 'sponsor_id');
         $url = $this->buildUrl( MEETUP_ENDPOINT_GROUPS, $Parameters, $required_params );
-        echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
     }
@@ -39,7 +38,6 @@ class MeetupGroups extends MeetupApiRequest {
     public function getComments( $Parameters ) {
         $required_params = array( 'group_id', 'group_urlname', 'topic,groupnum');
         $url = $this->buildUrl( MEETUP_ENDPOINT_GROUP_COMMENTS, $Parameters, $required_params );
-        echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
     }

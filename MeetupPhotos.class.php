@@ -20,7 +20,6 @@ class MeetupPhotos extends MeetupApiRequest {
     public function getComments( $Parameters ) {
         $required_params = array( 'photo_id');
         $url = $this->buildUrl( MEETUP_ENDPOINT_PHOTO_COMMENTS, $Parameters, $required_params );
-        echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response;
     }
@@ -38,7 +37,6 @@ class MeetupPhotos extends MeetupApiRequest {
     public function getAlbums( $Parameters ) {
         $required_params = array( 'event_id', 'group_id', 'photo_album_id');
         $url = $this->buildUrl( MEETUP_ENDPOINT_PHOTO_ALBUMS, $Parameters, $required_params );
-        echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
     }
@@ -56,7 +54,6 @@ class MeetupPhotos extends MeetupApiRequest {
     public function getPhotos( $Parameters ) {
         $required_params = array( 'event_id', 'group_id', 'photo_album_id', 'member_id', 'photo_id', 'tagged');
         $url = $this->buildUrl( MEETUP_ENDPOINT_PHOTOS, $Parameters, $required_params );
-        echo $url;
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
     }
