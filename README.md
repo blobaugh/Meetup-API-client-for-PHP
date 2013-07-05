@@ -82,5 +82,5 @@ Exceptions will usually occur when an invalid API request is recieved. The follo
 - POST support
 - everywhere endpoints implementation
 
-If you would like to see specific new developments please feel free to contribute through code of financial incentives.
+If you would like to see specific new developments please feel free to contribute through code or financial incentives.
 
