@@ -19,7 +19,7 @@ class MeetupGroups extends MeetupApiRequest {
      * @return Array
      */
     public function getGroups( $Parameters ) {
-        $required_params = array( 'campaign_id', 'domain', 'group_id', 'group_urlname', 'member_id', 'organizer_id', 'sponsor_id');
+        $required_params = array( 'campaign_id', 'domain', 'group_id', 'group_urlname', 'member_id', 'organizer_id', 'sponsor_id', 'topic');
         $url = $this->buildUrl( MEETUP_ENDPOINT_GROUPS, $Parameters, $required_params );
         $response =  $this->get( $url )->getResponse();
         return $response['results'];
